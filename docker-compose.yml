@@ -1,0 +1,10 @@
+version: "2"
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: ./dockerfile/Dockerfile_python35
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "5000:5000"
