@@ -1,10 +1,35 @@
 version: "2"
 services:
-  flask:
+  seriauth:
     build:
       context: .
       dockerfile: ./dockerfile/Dockerfile_python35
+    depends_on:
+      - data
+      - seriauth_db
+    env_file:
+      - ./env/seriauth.env
+      - ./env/seriauth_db_secrets.env
+      - ./env/seriauth_secrets.env
     volumes:
       - .:/usr/src/app
     ports:
       - "5000:5000"
+  seriauth_db:
+    image: postgres:9.6.0
+    env_file:
+      - ./env/seriauth_db.env
+      - ./env/seriauth_pg_secrets.env
+    volumes_from:
+      - data
+    depends_on:
+      - data
+    volumes:
+      - ./seriauth/sql:/usr/sql
+  data:
+    image: busybox
+    volumes:
+      - psdata:/var/lib/postgresql/data
+volumes:
+  psdata:
+    external: true

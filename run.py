@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 import argparse
 
-from auth import create_app
+from seriauth import create_app
 
 # Create the flask app.
 app = create_app('config.default')

@@ -63,8 +63,8 @@ def configure_logging(app):
 def init_modules(app):
 
     # Import blueprint modules
-    from auth.home.views import home
-    from auth.api.v1.views import v1
+    from seriauth.home.views import home
+    from seriauth.api.v1.views import v1
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(v1, url_prefix='/api/v1')
