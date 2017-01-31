@@ -2,7 +2,7 @@
 # Variables Flask
 import os
 
-HOST = "0.0.0.0"
+HOST = '0.0.0.0'
 DEBUB = False
 BCRYPT_LEVEL = 12
 PORT = 5000

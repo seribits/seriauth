@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
 from jose import jwt
-from authservice.config_env_authservice import jwt_secret
+import os
 
+# from authservice.config_env_authservice import jwt_secret
+jwt_secret = os.environ['SERIAUTH_JWT_SECRET']
 
 def encode_token(claims):
     """Crea un token de autentificación.
