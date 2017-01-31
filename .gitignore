@@ -15,7 +15,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -92,3 +92,4 @@ ENV/
 env/seriauth_db_secrets.env
 env/seriauth_pg_secrets.env
 env/seriauth_secrets.env
+env/seriauth_super_permissions_secrets.env

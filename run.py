@@ -5,7 +5,7 @@ import os
 from seriauth import create_app
 
 # Create the flask app.
-app = create_app('config.default')
+app = create_app('config.development')
 
 # Run the app
 if __name__ == '__main__':

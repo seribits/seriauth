@@ -11,6 +11,7 @@ services:
       - ./env/seriauth.env
       - ./env/seriauth_db_secrets.env
       - ./env/seriauth_secrets.env
+      - ./env/seriauth_super_permissions_secrets.env
     volumes:
       - .:/usr/src/app
     ports:
@@ -25,7 +26,7 @@ services:
     depends_on:
       - data
     volumes:
-      - ./seriauth/sql:/usr/sql
+      - ./sql:/usr/sql
   data:
     image: busybox
     volumes:
