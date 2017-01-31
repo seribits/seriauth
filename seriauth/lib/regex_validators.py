@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 import re
-# from authservice.config_env_authservice import pattern_password
 
 
 def validate_email(email):
