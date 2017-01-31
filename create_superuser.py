@@ -3,7 +3,7 @@
 from seriauth.superusers.models import Superusers
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, or_
-from config.default import SQLALCHEMY_DATABASE_URI
+from config.production import SQLALCHEMY_DATABASE_URI
 from seriauth.lib.encrypt import encrypt_sha512
 from seriauth.lib.regex_validators import validate_email, validate_password
 import getpass
