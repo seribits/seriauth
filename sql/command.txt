@@ -1,0 +1,11 @@
+# Línea de comando ejecutada en PostgreSQL
+# Crea:
+# - Base de datos
+# - Usuario para dicha base de datos
+# parametros:
+# init_database.sql = Nombre del archivo con los comandos sql
+# BDNAME = nombre de la base de datos
+# PASSWORDDB = contraseña del usuario
+# PROJECTUSER = nombre del usuario asignado a esa base de datos
+
+psql -h localhost -U postgres --file=init_database.sql --variable=BDNAME=test --variable=PASSWORDDB="'test'" --variable=PROJECTUSER=test
