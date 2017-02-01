@@ -93,3 +93,4 @@ env/seriauth_db_secrets.env
 env/seriauth_pg_secrets.env
 env/seriauth_secrets.env
 env/seriauth_super_permissions_secrets.env
+migrations/

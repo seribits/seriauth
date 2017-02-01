@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
-from marshmallow import Schema, fields, ValidationError
-from sqlalchemy.exc import SQLAlchemyError
 from collections import OrderedDict
+
+from marshmallow import Schema, ValidationError, fields
+from sqlalchemy.exc import SQLAlchemyError
+
 from seriauth import db
 
 
