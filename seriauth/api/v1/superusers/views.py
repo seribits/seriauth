@@ -8,7 +8,6 @@ from seriauth.lib.errors import error_409, error_410, error_422, error_500
 
 from seriauth.api.v1 import v1
 
-# superusers = Blueprint('superusers', __name__)
 schema = SuperusersSchema()
 api = Api(v1)
 

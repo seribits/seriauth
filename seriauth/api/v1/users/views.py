@@ -7,8 +7,6 @@ from seriauth.lib.regex_validators import validate_password
 from seriauth.lib.errors import error_409, error_410, error_422, error_500
 
 from seriauth.api.v1 import v1
-# users = Blueprint('users', __name__)
-
 
 schema = UsersSchema()
 api = Api(v1)

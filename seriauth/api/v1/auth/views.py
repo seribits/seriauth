@@ -4,11 +4,8 @@ from flask_restful import Resource, Api, reqparse
 from .auth_user import auth_superuser, auth_user
 from marshmallow import ValidationError
 from seriauth.lib.errors import error_409, error_410, error_422, error_500
-from seriauth.auth.models import TokenSchema
-
-
+from seriauth.api.v1.auth.models import TokenSchema
 from seriauth.api.v1 import v1
-# users = Blueprint('users', __name__)
 
 schema = TokenSchema()
 api = Api(v1)
