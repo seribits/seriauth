@@ -3,4 +3,5 @@ from flask import Blueprint
 
 v1 = Blueprint('v1', __name__)
 
-# from . import views
+from seriauth.api.v1.users import views
+from seriauth.api.v1.superusers import views

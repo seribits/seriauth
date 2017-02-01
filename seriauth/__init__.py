@@ -63,10 +63,10 @@ def configure_logging(app):
 def init_modules(app):
 
     # Import blueprint modules
-    from seriauth.superusers.views import superusers
-    from seriauth.users.views import users
+#    from seriauth.superusers.views import superusers
+    from seriauth.api.v1 import v1
     from seriauth.auth.views import tokens
 
-    app.register_blueprint(superusers, url_prefix='/api/v1/superusers')
+#    app.register_blueprint(superusers, url_prefix='/api/v1/superusers')
     app.register_blueprint(tokens, url_prefix='/api/v1/tokens')
-    app.register_blueprint(users, url_prefix='/api/v1/users')
+    app.register_blueprint(v1, url_prefix='/api/v1')

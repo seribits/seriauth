@@ -1,15 +1,17 @@
 # -*- encoding: utf-8 -*-
-from flask import Blueprint, request, make_response
-from seriauth.users.models import Users, UsersSchema, db
+# from flask import Blueprint, request, make_response
+from .models import Users, UsersSchema, db
 from flask_restful import Api, Resource
 from seriauth.lib.encrypt import encrypt_sha512
 from seriauth.lib.regex_validators import validate_password
 from seriauth.lib.errors import error_409, error_410, error_422, error_500
 
-users = Blueprint('users', __name__)
+from seriauth.api.v1 import v1
+# users = Blueprint('users', __name__)
+
 
 schema = UsersSchema()
-api = Api(users)
+api = Api(v1)
 
 
 # Recurso de Users
@@ -153,5 +155,5 @@ class UserDetail(Resource):
             return error_500()
 
 
-api.add_resource(UsersList, '')
-api.add_resource(UserDetail, '/<int:id>')
+api.add_resource(UsersList, '/users')
+api.add_resource(UserDetail, '/users/<int:id>')

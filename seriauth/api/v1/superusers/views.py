@@ -1,15 +1,16 @@
 # -*- encoding: utf-8 -*-
 from flask import request, Blueprint, make_response
-from seriauth.superusers.models import Superusers, SuperusersSchema, db
+from .models import Superusers, SuperusersSchema, db
 from flask_restful import Api, Resource
 from seriauth.lib.encrypt import encrypt_sha512
 from seriauth.lib.regex_validators import validate_password
 from seriauth.lib.errors import error_409, error_410, error_422, error_500
 
+from seriauth.api.v1 import v1
 
-superusers = Blueprint('superusers', __name__)
+# superusers = Blueprint('superusers', __name__)
 schema = SuperusersSchema()
-api = Api(superusers)
+api = Api(v1)
 
 
 # Recurso de Superusers
@@ -113,5 +114,5 @@ class SuperuserDetail(Resource):
             return error_500()
 
 
-api.add_resource(SuperusersList, '')
-api.add_resource(SuperuserDetail, '/<int:id>')
+api.add_resource(SuperusersList, '/superusers')
+api.add_resource(SuperuserDetail, '/superusers/<int:id>')

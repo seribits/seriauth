@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from flask import jsonify
-from seriauth.superusers.models import Superusers
-from seriauth.users.models import Users
+from seriauth.api.v1.superusers.models import Superusers
+from seriauth.api.v1.users.models import Users
 from datetime import timedelta, datetime
 from seriauth.lib import jwt
 from seriauth.lib.encrypt import check_sha512
