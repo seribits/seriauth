@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 # from flask import Blueprint, request, make_response
-from .models import Users, UsersSchema, db
 from flask_restful import Api, Resource
-from seriauth.lib.encrypt import encrypt_sha512
-from seriauth.lib.regex_validators import validate_password
-from seriauth.lib.errors import error_409, error_410, error_422, error_500
 
-from seriauth.api.v1 import v1
+from .. import v1
+from ...lib.encrypt import encrypt_sha512
+from ...lib.errors import error_409, error_410, error_422, error_500
+from ...lib.regex_validators import validate_password
+from .models import Users, UsersSchema, db
 
 schema = UsersSchema()
 api = Api(v1)

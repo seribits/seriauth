@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import os
-import configparser
-from logging.handlers import RotatingFileHandler
+
+from flask import Flask
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from logging.handlers import RotatingFileHandler
 
 db = SQLAlchemy()
 
@@ -63,8 +63,8 @@ def configure_logging(app):
 def init_modules(app):
 
     # Import blueprint modules
-    from seriauth.home.views import home
-    from seriauth.api.v1 import v1
+    from .api.v1 import v1
+    from .home.views import home
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(v1, url_prefix='/api/v1')

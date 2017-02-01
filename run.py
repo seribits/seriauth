@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import os
+
 from seriauth import create_app
 
 # Create the flask app.

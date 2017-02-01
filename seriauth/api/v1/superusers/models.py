@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
-from marshmallow import Schema, fields, ValidationError
 from collections import OrderedDict
+
+from marshmallow import Schema, ValidationError, fields
+
 from seriauth import db
 
 

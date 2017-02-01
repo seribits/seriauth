@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-from seriauth.superusers.models import Superusers
-from sqlalchemy.orm import sessionmaker
+import getpass
+import os
+
 from sqlalchemy import create_engine, or_
+from sqlalchemy.orm import sessionmaker
+
 from config.production import SQLALCHEMY_DATABASE_URI
 from seriauth.lib.encrypt import encrypt_sha512
 from seriauth.lib.regex_validators import validate_email, validate_password
-import getpass
-import os
+from seriauth.superusers.models import Superusers
 
 super_permissions = os.environ['SERIAUTH_SUPER_PERMISSIONS_SECRET']
 
