@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
-from jose import jwt
 import os
+
+from jose import jwt
 
 jwt_secret = os.environ['SERIAUTH_JWT_SECRET']
 

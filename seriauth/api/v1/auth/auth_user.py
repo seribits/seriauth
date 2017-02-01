@@ -1,11 +1,13 @@
 # -*- encoding: utf-8 -*-
+from datetime import datetime, timedelta
+
 from flask import jsonify
-from seriauth.superusers.models import Superusers
-from seriauth.users.models import Users
-from datetime import timedelta, datetime
-from seriauth.lib import jwt
-from seriauth.lib.encrypt import check_sha512
-from seriauth.lib.errors import error_409, error_410, error_500
+
+from ...lib import jwt
+from ...lib.encrypt import check_sha512
+from ...lib.errors import error_409, error_410, error_500
+from ..superusers.models import Superusers
+from ..users.models import Users
 
 
 def auth_superuser(req_username, req_password, req_exp):

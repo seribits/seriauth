@@ -1,14 +1,15 @@
 # -*- encoding: utf-8 -*-
 from flask import Blueprint, jsonify, request
-from flask_restful import Resource, Api, reqparse
-from seriauth.auth.auth_user import auth_superuser, auth_user
+from flask_restful import Api, Resource, reqparse
 from marshmallow import ValidationError
-from seriauth.lib.errors import error_409, error_410, error_422, error_500
-from seriauth.auth.models import TokenSchema
 
-tokens = Blueprint('tokens', __name__)
+from .. import v1
+from ...lib.errors import error_409, error_410, error_422, error_500
+from .auth_user import auth_superuser, auth_user
+from .models import TokenSchema
+
 schema = TokenSchema()
-api = Api(tokens)
+api = Api(v1)
 
 
 class Tokens(Resource):
@@ -40,4 +41,4 @@ class Tokens(Resource):
                 return auth_user(req_email, req_pw, req_exp)
 
 
-api.add_resource(Tokens, '')
+api.add_resource(Tokens, '/tokens')
