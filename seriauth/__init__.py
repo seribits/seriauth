@@ -68,3 +68,4 @@ def init_modules(app):
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(v1, url_prefix='/api/v1')
+    
