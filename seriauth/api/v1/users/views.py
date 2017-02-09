@@ -2,14 +2,14 @@
 # from flask import Blueprint, request, make_response
 from flask_restful import Api, Resource
 
-from .. import v1
+from .. import blueprint_users
 from ...lib.encrypt import encrypt_sha512
 from ...lib.errors import error_409, error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
 from .models import Users, UsersSchema, db
 
 schema = UsersSchema()
-api = Api(v1)
+api = Api(blueprint_users)
 
 
 # Recurso de Users
