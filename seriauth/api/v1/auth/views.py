@@ -3,13 +3,13 @@ from flask import Blueprint, jsonify, request
 from flask_restful import Api, Resource, reqparse
 from marshmallow import ValidationError
 
-from .. import v1
+from .. import blueprint_auth
 from ...lib.errors import error_409, error_410, error_422, error_500
 from .auth_user import auth_superuser, auth_user
 from .models import TokenSchema
 
 schema = TokenSchema()
-api = Api(v1)
+api = Api(blueprint_auth)
 
 
 class Tokens(Resource):

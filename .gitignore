@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-# env/
+env/
 build/
 develop-eggs/
 dist/
@@ -89,8 +89,12 @@ ENV/
 .ropeproject
 
 # Configuration production
-env/seriauth_db_secrets.env
-env/seriauth_pg_secrets.env
-env/seriauth_secrets.env
-env/seriauth_super_permissions_secrets.env
+envs/seriauth_db_secrets.env
+envs/seriauth_pg_secrets.env
+envs/seriauth_secrets.env
+envs/seriauth_super_permissions_secrets.env
 migrations/
+
+# Database test
+config/seriauth.db
+config/superusers.db
