@@ -17,7 +17,7 @@ def encrypt_sha512(password, rounds, salt):
     else:
         password_encrypt = pbkdf2_sha512.encrypt(
             password, rounds=rounds, salt_size=salt
-        )
+            )
     return password_encrypt
 
 

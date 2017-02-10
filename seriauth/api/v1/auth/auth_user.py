@@ -6,12 +6,12 @@ from flask import jsonify
 from ...lib import jwt
 from ...lib.encrypt import check_sha512
 from ...lib.errors import error_409, error_410, error_500
-from ..superusers.models import Superusers
-from ..users.models import Users
+from ..superusers.models import Superuser
+from ..users.models import User
 
 
 def auth_superuser(req_username, req_password, req_exp):
-    """Valida información y otorga token a Superusers.
+    """Valida información y otorga token a Superuser.
 
     Argumentos:
     req_username - Usuario
@@ -21,7 +21,7 @@ def auth_superuser(req_username, req_password, req_exp):
     try:
         expiration = req_exp if req_exp is not None else 10080
         expiration = expiration if expiration < 11000 else 10080
-        user = Superusers.query.filter_by(username=req_username).first()
+        user = Superuser.query.filter_by(username=req_username).first()
         if user is None:
             res = error_410()
         else:
@@ -31,7 +31,7 @@ def auth_superuser(req_username, req_password, req_exp):
             if validate and (username == req_username):
                 expire = (
                     datetime.utcnow() + timedelta(minutes=expiration)
-                )
+                    )
                 token = {
                     "type": "superuser",
                     "sub": user.username,
@@ -41,17 +41,16 @@ def auth_superuser(req_username, req_password, req_exp):
                     "is_active": user.is_active,
                     "permissions": {
                         "everything": user.permissions
+                        }
                     }
-                }
                 results = jwt.encode_token(token)
                 res = jsonify({"token": results})
-                # res = jsonify({"token": token})
                 res.status_code = 201
             else:
                 err = ({
                     "sub": ["Dato incorrecto"],
                     "password": ["Dato incorrecto."]
-                })
+                    })
                 res = error_409(err)
             return res
         return res
@@ -61,7 +60,7 @@ def auth_superuser(req_username, req_password, req_exp):
 
 
 def auth_user(req_email, req_password, req_exp):
-    """Valida información y otorga token a Users.
+    """Valida información y otorga token a User.
 
     Argumentos:
     req_email - Correo
@@ -71,7 +70,7 @@ def auth_user(req_email, req_password, req_exp):
     try:
         expiration = req_exp if req_exp is not None else 10080
         expiration = expiration if expiration < 11000 else 10080
-        user = Users.query.filter_by(email=req_email).first()
+        user = User.query.filter_by(email=req_email).first()
         if user is None:
             res = error_410()
         else:
@@ -81,7 +80,7 @@ def auth_user(req_email, req_password, req_exp):
             if validate and (req_email == email):
                 expire = (
                     datetime.utcnow() + timedelta(minutes=expiration)
-                )
+                    )
                 token = {
                     "type": "user",
                     "sub": user.email,
@@ -90,7 +89,7 @@ def auth_user(req_email, req_password, req_exp):
                     "email": user.email,
                     "is_active": user.is_active,
                     "permissions:": {}
-                }
+                    }
                 results = jwt.encode_token(token)
                 res = jsonify({"token": results})
                 res.status_code = 201
@@ -98,7 +97,7 @@ def auth_user(req_email, req_password, req_exp):
                 err = ({
                     "sub": ["Dato incorrecto"],
                     "password": ["Dato incorrecto."]
-                })
+                    })
                 res = error_409(err)
             return res
         return res

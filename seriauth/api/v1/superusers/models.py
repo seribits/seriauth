@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from collections import OrderedDict
-
 from marshmallow import Schema, ValidationError, fields
 
 from seriauth import db
@@ -23,8 +21,9 @@ class DAO():
         return db.session.commit()
 
 
-class Superusers(db.Model, DAO):
+class Superuser(db.Model, DAO):
     """Estructura básica del recurso Users."""
+
     __bind_key__ = 'superusers'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
@@ -33,12 +32,12 @@ class Superusers(db.Model, DAO):
         db.TIMESTAMP,
         server_default=db.func.current_timestamp(),
         nullable='False'
-    )
+        )
     is_active = db.Column(db.Boolean, server_default='True', nullable=False)
     password = db.Column(db.Text(), nullable=False)
-    # permissions = db.Column(db.ARRAY(db.String, dimensions=1), nullable=False)
+    # permissions = db.Column(db.ARRAY(db.String, dimensions=1),nullable=False)
 
-    def __init__(self,  username, email, password, permissions):
+    def __init__(self,  username, email, password):
         """Constructor de Superusers.
 
         Argumentos:
@@ -67,7 +66,7 @@ def must_not_be_blank(data):
 
 # Schema Superusers
 
-class SuperusersSchema(Schema):
+class SuperuserSchema(Schema):
     """Estructura de Superusers del tipo Schema."""
 
     # atributo id autoincrementable y de solo lectura dump_only=True
@@ -80,15 +79,15 @@ class SuperusersSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     email = fields.Email(
         required=True,
         error_messages={
             'invalid': 'Email no válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     password = fields.String(
         required=True,
         load_only=True,
@@ -96,11 +95,10 @@ class SuperusersSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     is_active = fields.Boolean(dump_only=True)
 
     class Meta:
         type_ = 'superusers'
         fields = ("id", "username", "email", "is_active", "password")
-        ordered = True

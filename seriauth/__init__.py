@@ -2,7 +2,7 @@
 import os
 
 from flask import Flask
-from flask_cors import CORS
+# from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
 
@@ -14,7 +14,7 @@ def create_app(config_filename):
     app = Flask(__name__)
 
     # Allow cross-domain access to API.
-    #cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+    # cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # Load the default configuration
     app.config.from_object(config_filename)
@@ -36,6 +36,7 @@ def create_app(config_filename):
     init_modules(app)
 
     return app
+
 
 def configure_logging(app):
     '''Configure the app's logging.
@@ -64,8 +65,9 @@ def init_modules(app):
 
     # Import blueprint modules
     # from .api.v1 import v1
-    from .api.v1 import (blueprint_users, blueprint_auth,
-                            blueprint_superusers, blueprint_emails)
+    from .api.v1 import (
+        blueprint_users, blueprint_auth, blueprint_superusers, blueprint_emails
+        )
     from .home.views import home
 
     app.register_blueprint(home, url_prefix='/')
