@@ -64,7 +64,6 @@ def configure_logging(app):
 def init_modules(app):
 
     # Import blueprint modules
-    # from .api.v1 import v1
     from .api.v1 import (
         blueprint_users, blueprint_auth, blueprint_superusers, blueprint_emails
         )
