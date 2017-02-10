@@ -1,23 +1,24 @@
 # -*_ encoding: utf-8 -*-
-from marshmallow import Schema, ValidationError, fields, pre_load
+from marshmallow import Schema, fields, pre_load
 
 from seriauth import db
 
-from ..users.models import Users, UsersSchema
+from ..users.models import UserSchema
 
 
-class Emails(db.Model):
+class Email(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('Users',
-                            backref=db.backref('emails', lazy='dynamic'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship(
+        'User', backref=db.backref('email', lazy='dynamic')
+        )
 
 
-class EmailsSchema(Schema):
+class EmailSchema(Schema):
     id = fields.Int(dump_only=True)
     email = fields.Str()
-    user = fields.Nested(UsersSchema)
+    user = fields.Nested(UserSchema)
 
     @pre_load
     def process_email(self, data):

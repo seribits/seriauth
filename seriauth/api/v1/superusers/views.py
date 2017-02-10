@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-from flask import Blueprint, make_response, request
+from flask import make_response, request
 from flask_restful import Api, Resource
 
 from .. import blueprint_superusers
 from ...lib.encrypt import encrypt_sha512
-from ...lib.errors import error_409, error_410, error_422, error_500
+from ...lib.errors import error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
-from .models import Superusers, SuperusersSchema, db
+from .models import Superuser, SuperuserSchema
 
-schema = SuperusersSchema()
+schema = SuperuserSchema()
 api = Api(blueprint_superusers)
 
 
@@ -21,7 +21,7 @@ class SuperusersList(Resource):
         """Obtiene un arreglo de Superusers."""
         try:
             # Consulta de todos los Superusers
-            query_set = Superusers.query.all()
+            query_set = Superuser.query.all()
             # Serializamos el query set indicando con many que es un array
             res = schema.dump(query_set, many=True).data
             return res, 200
@@ -41,7 +41,7 @@ class SuperuserDetail(Resource):
         """
         try:
             # Consulta del Superuser con <id>
-            query_set = Superusers.query.get(id)
+            query_set = Superuser.query.get(id)
             if query_set is None:
                 return error_410()
             else:
@@ -74,12 +74,12 @@ class SuperuserDetail(Resource):
             if errors:
                 return error_422(errors)
             try:
-                superuser = Superusers.query.get(id)
+                superuser = Superuser.query.get(id)
                 if superuser is None:
                     return error_410()
                 username, email, password = (
                     data['username'], data['email'], data['password']
-                )
+                    )
                 pw_validate = validate_password(password)
                 if not pw_validate:
                     err = {"password": ["La contraseña no es válida."]}
@@ -100,11 +100,11 @@ class SuperuserDetail(Resource):
         id -- Entero
         """
         try:
-            superuser = Superusers.query.get(id)
+            superuser = Superuser.query.get(id)
             if superuser is None:
                 return error_410()
             else:
-                delete = superuser.delete(superuser)
+                superuser.delete(superuser)
                 res = make_response()
                 res.status_code = 204
                 return res

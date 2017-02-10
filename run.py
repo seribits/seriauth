@@ -3,7 +3,7 @@
 from seriauth import create_app
 
 # Create the flask app.
-app = create_app('config.default')
+app = create_app('config.production')
 
 # Run the app
 if __name__ == '__main__':
@@ -11,4 +11,4 @@ if __name__ == '__main__':
         host=app.config['HOST'],
         port=app.config['PORT'],
         debug=app.config['DEBUG']
-    )
+        )

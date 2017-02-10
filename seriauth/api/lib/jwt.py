@@ -5,6 +5,7 @@ from jose import jwt
 
 jwt_secret = os.environ['SERIAUTH_JWT_SECRET']
 
+
 def encode_token(claims):
     """Crea un token de autentificación.
 

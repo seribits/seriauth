@@ -4,12 +4,12 @@ from flask_restful import Api, Resource
 
 from .. import blueprint_users
 from ...lib.encrypt import encrypt_sha512
-from ...lib.errors import error_409, error_410, error_422, error_500
+from ...lib.errors import error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
-from ..emails.models import Emails, EmailsSchema
-from .models import Users, UsersSchema, db
+from ..emails.models import EmailSchema
+from .models import User
 
-schema = EmailsSchema()
+schema = EmailSchema()
 api = Api(blueprint_users)
 
 
@@ -20,7 +20,7 @@ class UsersList(Resource):
     def get(self):
         """Obtiene un arreglo de Users."""
         try:
-            query_set = Users.query.all()
+            query_set = User.query.all()
             # Serializamos el query set indicando con many que es un array
             res = schema.dump(query_set, many=True).data
             return res, 200
@@ -57,7 +57,7 @@ class UserDetail(Resource):
         """
         try:
             # Consulta de User con <id>
-            query_set = Users.query.get(id)
+            query_set = User.query.get(id)
             if query_set is None:
                 return error_410()
             else:
@@ -90,7 +90,7 @@ class UserDetail(Resource):
             if errors:
                 return error_422(errors)
             try:
-                user = Users.query.get(id)
+                user = User.query.get(id)
                 if user is None:
                     return error_410()
                 email, password = data['email'], data['password']
@@ -113,11 +113,11 @@ class UserDetail(Resource):
         id -- Entero
         """
         try:
-            user = Users.query.get(id)
+            user = User.query.get(id)
             if user is None:
                 return error_410()
             else:
-                delete = user.delete(user)
+                user.delete(user)
                 res = make_response()
                 res.status_code = 204
                 return res

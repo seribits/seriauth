@@ -1,7 +1,5 @@
 # -*- encoding: utf-8 -*-
-from collections import OrderedDict
-
-from marshmallow import Schema, ValidationError, fields, pre_load
+from marshmallow import Schema, ValidationError, fields
 
 from seriauth import db
 
@@ -32,7 +30,7 @@ class DAO():
         return db.session.commit()
 
 
-class Users(db.Model, DAO):
+class User(db.Model, DAO):
     """Estructura básica del recurso Users."""
 
     id = db.Column(db.Integer, primary_key=True)
@@ -40,16 +38,14 @@ class Users(db.Model, DAO):
         db.TIMESTAMP,
         server_default=db.func.current_timestamp(),
         nullable='False'
-    )
+        )
     is_active = db.Column(
         db.Boolean,
         server_default='True',
         nullable=False
-    )
+        )
     password = db.Column(db.Text(), nullable=False)
-    """email = db.relationship('Emails',
-        backref=db.backref('user', lazy='joined'), lazy='dynamic')
-"""
+
 
 def must_not_be_blank(data):
     """Validación de atributos vacios.
@@ -61,7 +57,7 @@ def must_not_be_blank(data):
         raise ValidationError('El atributo no puede ser nulo.')
 
 
-class UsersSchema(Schema):
+class UserSchema(Schema):
     """Estructura de Users del tipo Schema."""
 
     id = fields.Integer(dump_only=True)  # solo lectura dump_only=True
@@ -72,11 +68,11 @@ class UsersSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     is_active = fields.Boolean(dump_only=True)
 
     class Meta:
-        type_ = 'users'
+        type_ = 'user'
         fields = ("id", "is_active", "password")
         ordered = True

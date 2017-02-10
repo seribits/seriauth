@@ -6,7 +6,7 @@ HOST = '0.0.0.0'
 DEBUG = 'True'
 BCRYPT_LEVEL = 12
 PORT = 5000
-SECRET_KEY  =  'Secret Key Default'
+SECRET_KEY = 'Secret Key Default'
 
 # Logging
 LOG_PATH = 'logs/error.log'
@@ -20,5 +20,5 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'seriauth.db')
 SQLALCHEMY_BINDS = {
-    'superusers':'sqlite:///' + os.path.join(basedir, 'superusers.db')
-}
+        'superusers': 'sqlite:///' + os.path.join(basedir, 'superusers.db')
+    }
