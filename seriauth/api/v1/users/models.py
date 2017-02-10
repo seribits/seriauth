@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
-from collections import OrderedDict
-
 from marshmallow import Schema, ValidationError, fields
-from sqlalchemy.exc import SQLAlchemyError
 
 from seriauth import db
 
@@ -33,32 +30,21 @@ class DAO():
         return db.session.commit()
 
 
-class Users(db.Model, DAO):
+class User(db.Model, DAO):
     """Estructura básica del recurso Users."""
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), unique=True, nullable=False)
     creation_time = db.Column(
         db.TIMESTAMP,
         server_default=db.func.current_timestamp(),
         nullable='False'
-    )
+        )
     is_active = db.Column(
         db.Boolean,
         server_default='True',
         nullable=False
-    )
+        )
     password = db.Column(db.Text(), nullable=False)
-
-    def __init__(self,  email, password):
-        """Constructor de Users.
-
-        Argumentos:
-        email - correo
-        password - contraseña
-        """
-        self.email = email
-        self.password = password
 
 
 def must_not_be_blank(data):
@@ -71,20 +57,10 @@ def must_not_be_blank(data):
         raise ValidationError('El atributo no puede ser nulo.')
 
 
-class UsersSchema(Schema):
+class UserSchema(Schema):
     """Estructura de Users del tipo Schema."""
 
     id = fields.Integer(dump_only=True)  # solo lectura dump_only=True
-    email = fields.Email(
-        required=True,
-        load_from='sub',
-        dump_to='sub',
-        validate=must_not_be_blank,
-        error_messages={
-            'invalid': 'Email no válido.',
-            'required': 'Atributo obligatorio.'
-        }
-    )
     password = fields.String(
         required=True,
         load_only=True,
@@ -92,11 +68,11 @@ class UsersSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     is_active = fields.Boolean(dump_only=True)
 
     class Meta:
-        type_ = 'users'
-        fields = ("id", "email", "is_active", "password")
+        type_ = 'user'
+        fields = ("id", "is_active", "password")
         ordered = True

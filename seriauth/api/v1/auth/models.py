@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-from collections import OrderedDict
-
 from marshmallow import Schema, ValidationError, fields
 
 
@@ -28,24 +26,24 @@ class TokenSchema(Schema):
         error_messages={
             'invalid': 'atributo no válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
     exp = fields.Integer(
         required=False,
         load_only=True,
         validate=must_not_be_blank,
         error_messages={
             'invalid': 'Atributo no válido debe ser de tipo entero.'
-        }
-    )
+            }
+        )
     type = fields.String(
         required=False,
         load_only=True,
         validate=must_not_be_blank,
         error_messages={
             'invalid': 'Atributo no válido.'
-        }
-    )
+            }
+        )
 
     password = fields.String(
         required=True,
@@ -54,5 +52,5 @@ class TokenSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-        }
-    )
+            }
+        )
