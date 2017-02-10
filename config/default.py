@@ -3,7 +3,7 @@ import os
 
 # Variables Flask
 HOST = '0.0.0.0'
-DEBUB = True
+DEBUG = 'True'
 BCRYPT_LEVEL = 12
 PORT = 5000
 SECRET_KEY  =  'Secret Key Default'

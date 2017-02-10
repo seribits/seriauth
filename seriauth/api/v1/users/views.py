@@ -1,14 +1,15 @@
 # -*- encoding: utf-8 -*-
-# from flask import Blueprint, request, make_response
+from flask import make_response, request
 from flask_restful import Api, Resource
 
 from .. import blueprint_users
 from ...lib.encrypt import encrypt_sha512
 from ...lib.errors import error_409, error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
+from ..emails.models import Emails, EmailsSchema
 from .models import Users, UsersSchema, db
 
-schema = UsersSchema()
+schema = EmailsSchema()
 api = Api(blueprint_users)
 
 
@@ -29,48 +30,20 @@ class UsersList(Resource):
 
     def post(self):
         """Crea un nuevo User."""
-        # Valida que la petición sea <application/json>
-        if request.content_type != "application/json":
-            err = {"content_type": ["Se esperaba application/json"]}
+        # Obtiene la información del request
+        json_data = request.get_json()
+        if not json_data:
+            err = {"datos": ["Información insuficientes."]}
             return error_422(err)
-        else:
-            # Obtiene la información del request
-            json_data = request.get_json(force=True)
-            if not json_data:
-                err = {"datos": ["Información insuficientes."]}
-                return error_422(err)
-            # validamos y deserializamos el request
-            data, errors = schema.load(json_data)
+        # validamos y deserializamos el request
+        data, errors = schema.load(json_data)
+        if errors:
+            return error_422(errors)
+        try:
+            return data
 
-            if errors:
-                return error_422(errors)
-            try:
-                email, password = data['email'], data['password']
-                # Consulta si existe algún email igual
-                query_set = Users.query.filter_by(email=email).first()
-                # Validación con expresión regular
-                pw_validate = validate_password(password)
-                if not pw_validate:
-                    err = {"password": ["La contraseña no es válida."]}
-                    return error_422(err)
-
-                if query_set is None:
-                    # Crear el nuevo user
-                    password_sha = encrypt_sha512(password, 10000, 10)
-                    user = Users(
-                        email=email,
-                        password=password_sha
-                    )
-                    user.add(user)
-                    query = Users.query.get(user.id)
-                    res = schema.dump(query).data
-                    return res, 201
-                else:
-                    err = {"sub": ["El usuario ya existe"]}
-                    return error_409(err)
-
-            except Exception as e:
-                return error_500()
+        except Exception as e:
+            return error_500()
 
 
 class UserDetail(Resource):

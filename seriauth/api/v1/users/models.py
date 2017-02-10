@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from collections import OrderedDict
 
-from marshmallow import Schema, ValidationError, fields
+from marshmallow import Schema, ValidationError, fields, pre_load
 
 from seriauth import db
 
@@ -36,7 +36,6 @@ class Users(db.Model, DAO):
     """Estructura básica del recurso Users."""
 
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), unique=True, nullable=False)
     creation_time = db.Column(
         db.TIMESTAMP,
         server_default=db.func.current_timestamp(),
@@ -48,17 +47,9 @@ class Users(db.Model, DAO):
         nullable=False
     )
     password = db.Column(db.Text(), nullable=False)
-
-    def __init__(self,  email, password):
-        """Constructor de Users.
-
-        Argumentos:
-        email - correo
-        password - contraseña
-        """
-        self.email = email
-        self.password = password
-
+    """email = db.relationship('Emails',
+        backref=db.backref('user', lazy='joined'), lazy='dynamic')
+"""
 
 def must_not_be_blank(data):
     """Validación de atributos vacios.
@@ -74,16 +65,6 @@ class UsersSchema(Schema):
     """Estructura de Users del tipo Schema."""
 
     id = fields.Integer(dump_only=True)  # solo lectura dump_only=True
-    email = fields.Email(
-        required=True,
-        load_from='sub',
-        dump_to='sub',
-        validate=must_not_be_blank,
-        error_messages={
-            'invalid': 'Email no válido.',
-            'required': 'Atributo obligatorio.'
-        }
-    )
     password = fields.String(
         required=True,
         load_only=True,
@@ -97,5 +78,5 @@ class UsersSchema(Schema):
 
     class Meta:
         type_ = 'users'
-        fields = ("id", "email", "is_active", "password")
+        fields = ("id", "is_active", "password")
         ordered = True

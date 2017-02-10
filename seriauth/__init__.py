@@ -57,7 +57,7 @@ def configure_logging(app):
 
     # First log informs where we are logging to.
     # Bit silly but serves  as a confirmation that logging works.
-    app.logger.info('Logging to: %s', log_path)
+    app.logger.info('Logging to: {}'.format(log_path))
 
 
 def init_modules(app):

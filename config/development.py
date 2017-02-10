@@ -3,7 +3,7 @@
 import os
 
 HOST = '0.0.0.0'
-DEBUB = True
+DEBUB = 'True'
 BCRYPT_LEVEL = 12
 PORT = 5000
 SECRET_KEY = os.environ['SERIAUTH_FLASK_SECRET']
