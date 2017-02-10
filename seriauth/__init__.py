@@ -38,7 +38,7 @@ def create_app(config_filename):
     return app
 
 def configure_logging(app):
-    ''' Configure the app's logging.
+    '''Configure the app's logging.
      param app: The Flask app object
     '''
 
@@ -57,14 +57,18 @@ def configure_logging(app):
 
     # First log informs where we are logging to.
     # Bit silly but serves  as a confirmation that logging works.
-    app.logger.info('Logging to: %s', log_path)
+    app.logger.info('Logging to: {}'.format(log_path))
 
 
 def init_modules(app):
 
     # Import blueprint modules
-    from .api.v1 import v1
+    from .api.v1 import (blueprint_users, blueprint_auth,
+                            blueprint_superusers, blueprint_emails)
     from .home.views import home
 
     app.register_blueprint(home, url_prefix='/')
-    app.register_blueprint(v1, url_prefix='/api/v1')
+    app.register_blueprint(blueprint_users, url_prefix='/api/v1')
+    app.register_blueprint(blueprint_auth, url_prefix='/api/v1')
+    app.register_blueprint(blueprint_superusers, url_prefix='/api/v1')
+    app.register_blueprint(blueprint_emails, url_prefix='/api/v1')

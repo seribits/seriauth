@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
+import os
+
 # Variables Flask
 HOST = '0.0.0.0'
-DEBUB = True
+DEBUG = 'True'
 BCRYPT_LEVEL = 12
 PORT = 5000
 SECRET_KEY  =  'Secret Key Default'
@@ -15,4 +17,8 @@ SQLALCHEMY_ECHO = True
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # Variable de conexión de SQLALCHEMY
-SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/default.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'seriauth.db')
+SQLALCHEMY_BINDS = {
+    'superusers':'sqlite:///' + os.path.join(basedir, 'superusers.db')
+}

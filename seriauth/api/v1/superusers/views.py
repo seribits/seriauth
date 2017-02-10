@@ -2,14 +2,14 @@
 from flask import Blueprint, make_response, request
 from flask_restful import Api, Resource
 
-from .. import v1
+from .. import blueprint_superusers
 from ...lib.encrypt import encrypt_sha512
 from ...lib.errors import error_409, error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
 from .models import Superusers, SuperusersSchema, db
 
 schema = SuperusersSchema()
-api = Api(v1)
+api = Api(blueprint_superusers)
 
 
 # Recurso de Superusers
