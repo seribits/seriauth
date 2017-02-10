@@ -20,10 +20,5 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'seriauth.db')
 SQLALCHEMY_BINDS = {
-<<<<<<< .merge_file_t2iQJN
-    'superusers':'sqlite:///' + os.path.join(basedir, 'superusers.db')
-}
-=======
         'superusers': 'sqlite:///' + os.path.join(basedir, 'superusers.db')
     }
->>>>>>> .merge_file_cQBlzN
