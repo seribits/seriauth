@@ -30,7 +30,7 @@ def validate_password(password):
     """
     pattern_password = (
         '(?=.*[A-Z])(?=.*[!#$%&/()?¿¡@;*])(?=.*[0-9])(?=.*[a-z]).{8,15}'
-        )
+    )
     if re.match(pattern_password, password):
         return True
     else:

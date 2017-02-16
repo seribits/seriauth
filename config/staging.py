@@ -25,7 +25,7 @@ SQLALCHEMY_DATABASE_URI = (
         DB_PASS=os.environ['SERIAUTH_DB_PASSWORD_SECRET'],
         DB_ADDR=os.environ['SERIAUTH_DB_HOST_SECRET'],
         DB_NAME=os.environ['SERIAUTH_DB_NAME_SECRET']
-        )
     )
+)
 
 SQLALCHEMY_BINDS = {}

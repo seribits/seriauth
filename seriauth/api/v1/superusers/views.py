@@ -79,7 +79,7 @@ class SuperuserDetail(Resource):
                     return error_410()
                 username, email, password = (
                     data['username'], data['email'], data['password']
-                    )
+                )
                 pw_validate = validate_password(password)
                 if not pw_validate:
                     err = {"password": ["La contraseña no es válida."]}

@@ -17,7 +17,7 @@ class User(db.Model):
     email = db.relationship(
         'Email', backref=db.backref(
             'user', lazy='joined'), lazy='dynamic', cascade='delete'
-            )
+    )
 
     def add(self, resource):
         """Nuevo."""
@@ -51,8 +51,8 @@ class UserSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-            }
-        )
+        }
+    )
     email = fields.Nested(EmailSchema, only=['email'], many=True)
 
     @validates('password')
@@ -60,7 +60,7 @@ class UserSchema(Schema):
         """Validación del atributo [password]."""
         pattern_password = (
             '(?=.*[A-Z])(?=.*[!#$%&/()?¿¡@;*])(?=.*[0-9])(?=.*[a-z]).{8,15}'
-            )
+        )
         if re.match(pattern_password, data):
             pass
         else:
