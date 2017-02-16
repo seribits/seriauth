@@ -6,7 +6,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from config.production import SQLALCHEMY_BINDS  # , SQLALCHEMY_DATABASE_URI
+from config.production import SQLALCHEMY_BINDS
 from seriauth.api.lib.encrypt import encrypt_sha512
 from seriauth.api.lib.regex_validators import validate_email, validate_password
 from seriauth.api.v1.superusers.models import Superuser
