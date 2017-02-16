@@ -6,14 +6,16 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from config.production import SQLALCHEMY_DATABASE_URI
-from seriauth.lib.encrypt import encrypt_sha512
-from seriauth.lib.regex_validators import validate_email, validate_password
-from seriauth.superusers.models import Superusers
+from config.production import SQLALCHEMY_BINDS
+from seriauth.api.lib.encrypt import encrypt_sha512
+from seriauth.api.lib.regex_validators import validate_email, validate_password
+from seriauth.api.v1.superusers.models import Superuser
 
 super_permissions = os.environ['SERIAUTH_SUPER_PERMISSIONS_SECRET']
 
-engine = create_engine(SQLALCHEMY_DATABASE_URI)
+# engine = create_engine(SQLALCHEMY_DATABASE_URI)
+engine = create_engine(SQLALCHEMY_BINDS['superusers'])
+
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -39,14 +41,14 @@ def create_superuser():
     password = encrypt_sha512(password, 10000, 10)
     try:
         q_username = (
-            session.query(Superusers).filter_by(username=username).count()
+            session.query(Superuser).filter_by(username=username).count()
             )
-        q_email = session.query(Superusers).filter_by(email=email).count()
+        q_email = session.query(Superuser).filter_by(email=email).count()
         if q_username > 0 or q_email > 0:
             print("¡Usuario o Correo, ya existen :( ! Intentelo nuevamente")
         else:
             permissions = super_permissions.split()
-            superuser = Superusers(
+            superuser = Superuser(
                 username=username, email=email,
                 password=password, permissions=permissions
                 )

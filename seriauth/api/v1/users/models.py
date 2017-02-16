@@ -1,67 +1,50 @@
 # -*- encoding: utf-8 -*-
-from marshmallow import Schema, ValidationError, fields
+"""Modelo y Esquema de User."""
+import re
+
+from marshmallow import Schema, ValidationError, fields, validates
 
 from seriauth import db
 
+from ..emails.models import EmailSchema
 
-class DAO():
-    """Ejecuta los cambios del recurso Users."""
+
+class User(db.Model):
+    """Modelo User."""
+
+    id = db.Column(db.Integer, primary_key=True)
+    password = db.Column(db.Text())
+    email = db.relationship(
+        'Email', backref=db.backref(
+            'user', lazy='joined'), lazy='dynamic', cascade='delete'
+            )
 
     def add(self, resource):
-        """Realiza la creación del recurso Users.
-
-        Argumentos:
-        resource - Objeto del tipo Users
-        """
+        """Nuevo."""
         db.session.add(resource)
         return db.session.commit()
 
     def update(self):
-        """Realiza la actualización del recurso Users."""
+        """Actualizar."""
         return db.session.commit()
 
     def delete(self, resource):
-        """Realiza la eliminación del recurso Users.
-
-        Argumentos:
-        resource - Objeto del tipo Users
-        """
+        """Eliminar."""
         db.session.delete(resource)
         return db.session.commit()
 
 
-class User(db.Model, DAO):
-    """Estructura básica del recurso Users."""
-
-    id = db.Column(db.Integer, primary_key=True)
-    creation_time = db.Column(
-        db.TIMESTAMP,
-        server_default=db.func.current_timestamp(),
-        nullable='False'
-        )
-    is_active = db.Column(
-        db.Boolean,
-        server_default='True',
-        nullable=False
-        )
-    password = db.Column(db.Text(), nullable=False)
-
-
 def must_not_be_blank(data):
-    """Validación de atributos vacios.
-
-    Argumentos:
-    data - valor del atributo
-    """
+    """Validación de campos nulos."""
     if not data:
         raise ValidationError('El atributo no puede ser nulo.')
 
 
 class UserSchema(Schema):
-    """Estructura de Users del tipo Schema."""
+    """PersonSchema."""
 
-    id = fields.Integer(dump_only=True)  # solo lectura dump_only=True
-    password = fields.String(
+    id = fields.Int(dump_only=True)
+    password = fields.Str(
         required=True,
         load_only=True,
         validate=must_not_be_blank,
@@ -70,9 +53,15 @@ class UserSchema(Schema):
             'required': 'Atributo obligatorio.'
             }
         )
-    is_active = fields.Boolean(dump_only=True)
+    email = fields.Nested(EmailSchema, only=['email'], many=True)
 
-    class Meta:
-        type_ = 'user'
-        fields = ("id", "is_active", "password")
-        ordered = True
+    @validates('password')
+    def validate_password(self, data):
+        """Validación del atributo [password]."""
+        pattern_password = (
+            '(?=.*[A-Z])(?=.*[!#$%&/()?¿¡@;*])(?=.*[0-9])(?=.*[a-z]).{8,15}'
+            )
+        if re.match(pattern_password, data):
+            pass
+        else:
+            raise ValidationError('La contraseña no es valida')
