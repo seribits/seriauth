@@ -1,22 +1,30 @@
 # -*_ encoding: utf-8 -*-
-from marshmallow import Schema, fields, pre_load
+"""Modelo y Esquema de Email."""
+from marshmallow import Schema, fields
 
 from seriauth import db
 
 
-class DAO():
-
-    def add(self, resource):
-        db.session.add(resource)
-        return db.session.commit()
-
-
-class Email(db.Model, DAO):
+class Email(db.Model):
     """Email."""
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def add(self, resource):
+        """Metodo para agregar."""
+        db.session.add(resource)
+        return db.session.commit()
+
+    def update(self):
+        """Actualiza."""
+        return db.session.commit()
+
+    def delete(self, resource):
+        """Eliminar."""
+        db.session.delete(resource)
+        return db.session.commit()
 
 
 class EmailSchema(Schema):
@@ -26,54 +34,10 @@ class EmailSchema(Schema):
     email = fields.Email(
             required=True,
             load_from='sub',
-            dump_to='sub',
+            # dump_to='sub',
             error_messages={
                 'invalid': 'Email no válido.',
                 'required': 'Atributo obligatorio.'
                 }
         )
     user_id = fields.Int(dump_to='user')
-
-"""    @pre_load
-    def process_email(self, data):
-        return {'sub': 'email2@seribits.com', 'user': 1}
-        user = data.get('password')
-        if user:
-            user_dict = dict(password=user)
-        else:
-            user_dict = {}
-        data['user'] = user_dict
-        return data
-"""
-"""C.
-class Email(db.Model, DAO):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(
-        'User', backref=db.backref('email', lazy='dynamic')
-        )
-
-class EmailSchema(Schema):
-    id = fields.Int(dump_only=True)
-    email = fields.Email(
-        required=True,
-        load_from='sub',
-        dump_to='sub',
-        error_messages={
-            'invalid': 'Email no válido.',
-            'required': 'Atributo obligatorio.'
-            }
-        )
-    user = fields.Nested(UserSchema)
-
-    @pre_load
-    def process_email(self, data):
-        user = data.get('password')
-        if user:
-            user_dict = dict(password=user)
-        else:
-            user_dict = {}
-        data['user'] = user_dict
-        return data
-"""
