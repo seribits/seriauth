@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from flask import Blueprint
 
+
 blueprint_users = Blueprint('blueprint_users', __name__)
 blueprint_auth = Blueprint('blueprint_auth', __name__)
 blueprint_superusers = Blueprint('blueprint_superusers', __name__)

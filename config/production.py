@@ -27,6 +27,14 @@ SQLALCHEMY_DATABASE_URI = (
         DB_NAME=os.environ['SERIAUTH_DB_NAME_SECRET']
         )
     )
-basedir = os.path.abspath(os.path.dirname(__file__))
 
-SQLALCHEMY_BINDS = {}
+SQLALCHEMY_BINDS = {
+        'superusers': "{DB_SGDB}://{DB_USER}:{DB_PASS}@{DB_ADDR}/{DB_NAME}".
+        format(
+            DB_SGDB=os.environ['SERIAUTH_DB_SGDB'],
+            DB_USER=os.environ['SERIAUTH_DB_USERNAME_SECRET'],
+            DB_PASS=os.environ['SERIAUTH_DB_PASSWORD_SECRET'],
+            DB_ADDR=os.environ['SERIAUTH_DB_HOST_SECRET'],
+            DB_NAME=os.environ['SERIAUTH_DB_NAME_BIND_SECRET']
+            )
+    }
