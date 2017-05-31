@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-"""Modelo y Esquema de User."""
+"""Modelo y Esquema del objeto User."""
 import re
 
 from marshmallow import Schema, ValidationError, fields, validates
@@ -20,12 +20,12 @@ class User(db.Model):
     )
 
     def add(self, resource):
-        """Nuevo."""
+        """Agregar nuevo recurso."""
         db.session.add(resource)
         return db.session.commit()
 
     def update(self):
-        """Actualizar."""
+        """Actualizar un recurso."""
         return db.session.commit()
 
     def delete(self, resource):
@@ -41,7 +41,7 @@ def must_not_be_blank(data):
 
 
 class UserSchema(Schema):
-    """PersonSchema."""
+    """Estructura encargada de validar."""
 
     id = fields.Int(dump_only=True)
     password = fields.Str(

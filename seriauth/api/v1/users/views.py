@@ -73,7 +73,7 @@ class UserDetail(Resource):
             return error_500()
 
     def put(self, id):
-        """Actualiza un Ususrio."""
+        """Actualiza un Usuario."""
         json_data = request.get_json()
         if not json_data:
             err = {"datos": ["Información insuficientes."]}

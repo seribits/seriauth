@@ -5,10 +5,13 @@ from passlib.hash import pbkdf2_sha512
 def encrypt_sha512(password, rounds, salt):
     """Devuelve un string cifrado.
 
-    Argumentos:
-    password - String a cifrar
-    rounds - Número de iteraciones a utilizar, default(12000) max(999999999).
-    salt - Salto criptográfica valor en bytes entre 0 y 1024.
+    :Parameters:
+
+    - password [str] - Cadena a cifrar
+    - rounds [int] - Iteraciones a utilizar, default(12000) max(999999999).
+    - salt [int] - Salto criptográfica valor en bytes entre 0 y 1024.
+
+    :rtype: str
     """
     rounds = rounds if rounds is not None else 12000
     salt = salt if salt is not None else 12
@@ -24,9 +27,10 @@ def encrypt_sha512(password, rounds, salt):
 def check_sha512(unknown_password, valid_password):
     """Valida un String y un String cifrado.
 
-    Argumentos:
-    unknown_password - String a comparar
-    valid_password - String cifrado
+    :Parameters:
+
+    - unknown_password [str] - Cadena a comparar
+    - valid_password [str] - Cadena cifrado
     """
     if unknown_password is None or valid_password is None:
         return "Sin parametros"

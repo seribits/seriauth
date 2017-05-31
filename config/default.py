@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Modulo que contiene variables de entorno 'default'."""
 import os
 
 # Variables Flask
@@ -16,9 +17,11 @@ LOG_LEVEL = 'DEBUG'
 SQLALCHEMY_ECHO = True
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-# Variable de conexión de SQLALCHEMY
+# Variable de configuración de SQLALCHEMY para sqlite.
 basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'seriauth.db')
+
+# Variable de configuración para multiples bases de datos.
 SQLALCHEMY_BINDS = {
     'superusers': 'sqlite:///' + os.path.join(basedir, 'superusers.db')
 }

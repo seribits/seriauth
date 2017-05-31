@@ -15,7 +15,12 @@ class Tokens(Resource):
     """Recibe las peticiones [POST] del recurso tokens."""
 
     def post(self):
-        """Crea un nuevo token de autentificación."""
+        """Crea un nuevo token de autentificación.
+
+        :Parameters:
+
+        - application/json
+        """
         if request.content_type != "application/json":
             err = {"content_type": ["Se esperaba application/json"]}
             return error_422(err)

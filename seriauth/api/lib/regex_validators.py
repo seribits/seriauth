@@ -5,8 +5,11 @@ import re
 def validate_email(email):
     """Valida un email.
 
-    Argumentos:
-    email - String a validar
+    :Parameters:
+
+    - email [str] - Email de un usuario.
+
+    :rtype: bool
     """
     pattern = '[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}'
     if re.match(pattern, email.lower()):
@@ -25,8 +28,11 @@ def validate_email(email):
 def validate_password(password):
     """Valida una contraseña.
 
-    Argumentos:
-    password - String a validar
+    :Parameters:
+
+    - password [str] - Contraseña de un usuario.
+
+    :rtype: bool
     """
     pattern_password = (
         '(?=.*[A-Z])(?=.*[!#$%&/()?¿¡@;*])(?=.*[0-9])(?=.*[a-z]).{8,15}'

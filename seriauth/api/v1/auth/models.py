@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Modulo con la estructura para la autenticación."""
 from marshmallow import Schema, ValidationError, fields
 
 
@@ -6,8 +7,9 @@ from marshmallow import Schema, ValidationError, fields
 def must_not_be_blank(data):
     """Validación de atributos vacios.
 
-    Argumentos:
-    data - valor del atributo
+    :Parameters:
+
+    - data - valor del atributo.
     """
     if not data:
         raise ValidationError('El atributo no puede ser nulo.')

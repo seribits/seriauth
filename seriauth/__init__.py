@@ -2,7 +2,6 @@
 import os
 
 from flask import Flask
-# from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
 
@@ -10,7 +9,14 @@ db = SQLAlchemy()
 
 
 def create_app(config_filename):
-    # Here we  create flask instance
+    """Creación de la instancia de Flask.
+
+    :Parameters:
+
+    - config_filename - (config.*) - Archivo con la configuración.
+
+    :rtype: Objeto Flask
+    """
     app = Flask(__name__)
 
     # Allow cross-domain access to API.
@@ -39,31 +45,31 @@ def create_app(config_filename):
 
 
 def configure_logging(app):
-    """Configure the app's logging.
+    """Configuración del registro de la Aplicación.
 
-    param app: The Flask app object
+    :Parameters:
+
+    - app - Objeto Flask
     """
     log_path = app.config['LOG_PATH']
     log_level = app.config['LOG_LEVEL']
 
-    # If path directory doesn't exist, create it.
+    # Si la ruta del directorio no existe la crea.
     log_dir = os.path.dirname(log_path)
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
-
-    # Create and register the log file handler.
+    # Crea y registra el manejador de errores.
     log_handler = RotatingFileHandler(log_path, maxBytes=250000, backupCount=5)
     log_handler.setLevel(log_level)
     app.logger.addHandler(log_handler)
 
-    # First log informs where we are logging to.
-    # Bit silly but serves  as a confirmation that logging works.
+    # El primer registro informa a dónde estamos registrando.
+    # Un tonto, pero sirve como una confirmación de que funciona.
     app.logger.info('Logging to: {}'.format(log_path))
 
 
 def init_modules(app):
-
-    # Import blueprint modules
+    """Importa los blueprints de los modulos de la API."""
     from .api.v1 import (
         blueprint_users, blueprint_auth, blueprint_superusers, blueprint_emails
     )

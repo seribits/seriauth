@@ -14,6 +14,7 @@ api = Api(blueprint_emails)
 class EmailList(Resource):
 
     def get(self):
+        """Obtiene todos los recursos del timpo Email."""
         try:
             query_set = Email.query.all()
             res = schema.dump(query_set, many=True).data
@@ -25,6 +26,7 @@ class EmailList(Resource):
 class EmailDetail(Resource):
 
     def get(self, id):
+        """Obtiene un recurso especifico por medio de su 'id'."""
         try:
             query_set = Email.query.get(id)
             if query_set is None:
@@ -36,7 +38,7 @@ class EmailDetail(Resource):
             return error_500()
 
     def put(self, id):
-        """Actualiza un Ususrio."""
+        """Actualiza el recurso."""
         json_data = request.get_json()
         if not json_data:
             err = {"datos": ["Información insuficientes."]}
@@ -54,12 +56,11 @@ class EmailDetail(Resource):
                 email.update()
                 res = schema.dump(email).data
                 return res, 200
-                # return self.get(id)
         except Exception as e:
             return e
 
     def delete(self, id):
-        """Elimina un usuario."""
+        """Elimina un recurso."""
         try:
             email = Email.query.get(id)
             if email is None:

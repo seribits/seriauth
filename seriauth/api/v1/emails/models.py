@@ -1,34 +1,34 @@
 # -*_ encoding: utf-8 -*-
-"""Modelo y Esquema de Email."""
+"""Modelo y Esquema del modelo Email."""
 from marshmallow import Schema, fields
 
 from seriauth import db
 
 
 class Email(db.Model):
-    """Email."""
+    """Clase del modelo Email."""
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def add(self, resource):
-        """Metodo para agregar."""
+        """Agrega un Email."""
         db.session.add(resource)
         return db.session.commit()
 
     def update(self):
-        """Actualiza."""
+        """Actualiza un Email."""
         return db.session.commit()
 
     def delete(self, resource):
-        """Eliminar."""
+        """Eliminar un Email."""
         db.session.delete(resource)
         return db.session.commit()
 
 
 class EmailSchema(Schema):
-    """EmailSchema."""
+    """Clase con la estructura de validación para el modelo Email."""
 
     id = fields.Int(dump_only=True)
     email = fields.Email(

@@ -1,4 +1,4 @@
-# Línea de comando ejecutada en PostgreSQL
+# Línea de comando que ejecutada en PostgreSQL
 # Crea:
 # - Base de datos
 # - Usuario para dicha base de datos

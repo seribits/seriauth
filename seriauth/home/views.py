@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-"""Views home."""
+"""Vista de inicio."""
 from flask import Blueprint
 
 home = Blueprint('home', __name__)
@@ -7,5 +7,5 @@ home = Blueprint('home', __name__)
 
 @home.route('', methods=['GET'])
 def index():
-    """Render the App index page."""
+    """Muestra una vista de inicio."""
     return "Welcome"

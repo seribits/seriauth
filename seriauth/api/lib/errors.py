@@ -5,8 +5,10 @@ from flask import jsonify
 def error_409(error):
     """Genera un objeto JSON para el error 409.
 
-    Argumentos:
-    error - String especifica cual fue el error.
+    :Parameters:
+    - error [str] - Mensaje que especifica cual fue el error.
+
+    :rtype: response
     """
     response = jsonify({"error": error})
     response.status_code = 409
@@ -14,7 +16,10 @@ def error_409(error):
 
 
 def error_410():
-    """Genera un objeto JSON para el error 410."""
+    """Genera un objeto JSON para el error 410.
+
+    :rtype: response
+    """
     response = jsonify(
         {"error": {"recurso": ["El recurso solicitado no existe."]}}
     )
@@ -25,8 +30,12 @@ def error_410():
 def error_422(error):
     """Genera un objeto JSON para el error 422.
 
-    Argumentos:
-    error - String especifica cual fue el error.
+    :Parameters:
+
+    - error - String especifica cual fue el error.
+
+    :rtype: response
+
     """
     response = jsonify({"error": error})
     response.status_code = 422
@@ -34,7 +43,10 @@ def error_422(error):
 
 
 def error_500():
-    """Genera un objeto JSON para el error 500."""
+    """Genera un objeto JSON para el error 500.
+
+    :rtype: response
+    """
     response = jsonify(
         {"error": {"BD": ["Sin conexión."]}}
     )

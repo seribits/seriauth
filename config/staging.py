@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
-# Variables Flask
+"""Modulo que contiene variables de entorno 'staging'."""
+
 import os
 
+# Variables Flask
 HOST = '0.0.0.0'
 DEBUB = 'False'
 BCRYPT_LEVEL = 12
@@ -16,9 +18,8 @@ LOG_LEVEL = 'DEBUG'
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-# Variable de conexión de SQLALCHEMY
+# Variable de conexión de SQLALCHEMY para un SGDB soportado
 SQLALCHEMY_DATABASE_URI = (
-    # Configuración de la base de datos
     "{DB_SGDB}://{DB_USER}:{DB_PASS}@{DB_ADDR}/{DB_NAME}".format(
         DB_SGDB=os.environ['SERIAUTH_DB_SGDB'],
         DB_USER=os.environ['SERIAUTH_DB_USERNAME_SECRET'],
@@ -28,4 +29,5 @@ SQLALCHEMY_DATABASE_URI = (
     )
 )
 
+# Configurar en caso de usar multiples bases de datos en el proyecto.
 SQLALCHEMY_BINDS = {}

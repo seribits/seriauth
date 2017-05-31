@@ -1,2 +1,2 @@
 # seriauth
-Microservice for authenticate any kind of devices
+Microservicio para la autenticación para cualquier servicio.

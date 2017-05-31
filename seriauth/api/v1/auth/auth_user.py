@@ -15,10 +15,10 @@ schema = EmailSchema()
 def auth_superuser(req_username, req_password, req_exp):
     """Valida información y otorga token a Superuser.
 
-    Argumentos:
-    req_username - Usuario
-    req_password - Contraseña
-    req_exp - Tiempo de expiración del token
+    :Parameters:
+    - req_username [str] - Nombre del usuario.
+    - req_password [str] - Contraseña del usuario.
+    - req_exp [int]- Tiempo de expiración del token en min.
     """
     try:
         expiration = req_exp if req_exp is not None else 10080
@@ -64,16 +64,16 @@ def auth_superuser(req_username, req_password, req_exp):
 def auth_user(req_email, req_password, req_exp):
     """Valida información y otorga token a User.
 
-    Argumentos:
-    req_email - Correo
-    req_password - Contraseña
-    req_exp - Tiempo de expiración del token
+    :Parameters:
+
+    - req_email [str] - Correo del usuario.
+    - req_password [str] - Contraseña del usuario.
+    - req_exp [int] - Tiempo de expiración del token en min.
     """
     try:
         expiration = req_exp if req_exp is not None else 10080
         expiration = expiration if expiration < 11000 else 10080
         object_email = Email.query.filter_by(email=req_email).first()
-        # data_email = schema.dump(search_email).data
         object_user = User.query.filter_by(id=object_email.user_id).first()
         if object_user is None:
             res = error_410()

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+"""Modulo con la utilería para la creación de un Superusuario."""
 import getpass
 import os
 
@@ -11,20 +12,29 @@ from seriauth.api.lib.encrypt import encrypt_sha512
 from seriauth.api.lib.regex_validators import validate_email, validate_password
 from seriauth.api.v1.superusers.models import Superuser
 
+# Asigna los Permisos de la variable de entorno de configuración.
 super_permissions = os.environ['SERIAUTH_SUPER_PERMISSIONS_SECRET']
 
-# engine = create_engine(SQLALCHEMY_DATABASE_URI)
+# Especificación de la conexión
 engine = create_engine(SQLALCHEMY_BINDS['superusers'])
 
 Session = sessionmaker(bind=engine)
 session = Session()
 
-""" Función para la creación de los superuser.
-"""
-
 
 def create_superuser():
-    """Crea un nuevo Superuser."""
+    """Crea un Superusuario.
+
+    :Parameters:
+
+    - username (str) - Nombre del usuario.
+    - email (str) - Email del usuario.
+    - password (str) - Contraseña del usuario.
+
+    :note:
+    
+    Los parametros que recibe se dan por línea de comando.
+    """
     print("Nuevo administrador")
     username = input("Ingrese su Usuario: ")
     email = input("Ingrese su Correo: ")

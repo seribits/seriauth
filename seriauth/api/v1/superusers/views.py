@@ -34,10 +34,11 @@ class SuperuserDetail(Resource):
     """Recibe las peticiones [GET,PUT,DELETE] del recurso superusers."""
 
     def get(self, id):
-        """Devuelve al Superuser con <id>.
+        """Devuelve al Superuser especifico.
 
-        Parametros:
-        id -- Entero
+        :Parameters:
+
+        - id [int] - Identificador unico del recurso.
         """
         try:
             # Consulta del Superuser con <id>
@@ -54,10 +55,12 @@ class SuperuserDetail(Resource):
             return error_500()
 
     def put(self, id):
-        """Actualiza al Superuser con <id>.
+        """Actualiza al Superuser especifico.
 
-        Parametros:
-        id -- Entero
+        :Parameters:
+
+        - id [int] - Identificador unico del recurso.
+
         """
         # Valida que la petición sea <application/json>
         if request.content_type != "application/json":
@@ -96,8 +99,9 @@ class SuperuserDetail(Resource):
     def delete(self, id):
         """Elimina al Superuser con <id>.
 
-        Parametros:
-        id -- Entero
+        :Parameters:
+
+        - id [int] - Identificador unico del recurso.
         """
         try:
             superuser = Superuser.query.get(id)

@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
-# Variables Flask
+"""Modulo que contiene variables de entorno 'development'."""
 import os
 
+# Variables Flask
 HOST = '0.0.0.0'
 DEBUB = 'True'
 BCRYPT_LEVEL = 12
@@ -28,4 +29,5 @@ SQLALCHEMY_DATABASE_URI = (
     )
 )
 
+# Configurar en caso de usar multiples bases de datos en el proyecto.
 SQLALCHEMY_BINDS = {}
