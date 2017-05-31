@@ -32,7 +32,7 @@ class Superuser(db.Model, DAO):
         db.TIMESTAMP,
         server_default=db.func.current_timestamp(),
         nullable='False'
-        )
+    )
     is_active = db.Column(db.Boolean, server_default='True', nullable=False)
     password = db.Column(db.Text(), nullable=False)
     permissions = db.Column(db.ARRAY(db.String, dimensions=1), nullable=False)
@@ -79,15 +79,15 @@ class SuperuserSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-            }
-        )
+        }
+    )
     email = fields.Email(
         required=True,
         error_messages={
             'invalid': 'Email no válido.',
             'required': 'Atributo obligatorio.'
-            }
-        )
+        }
+    )
     password = fields.String(
         required=True,
         load_only=True,
@@ -95,8 +95,8 @@ class SuperuserSchema(Schema):
         error_messages={
             'invalid': 'No es un string válido.',
             'required': 'Atributo obligatorio.'
-            }
-        )
+        }
+    )
     is_active = fields.Boolean(dump_only=True)
 
     class Meta:

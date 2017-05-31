@@ -32,12 +32,12 @@ class EmailSchema(Schema):
 
     id = fields.Int(dump_only=True)
     email = fields.Email(
-            required=True,
-            load_from='sub',
-            # dump_to='sub',
-            error_messages={
-                'invalid': 'Email no válido.',
-                'required': 'Atributo obligatorio.'
-                }
-        )
+        required=True,
+        load_from='sub',
+        # dump_to='sub',
+        error_messages={
+            'invalid': 'Email no válido.',
+            'required': 'Atributo obligatorio.'
+        }
+    )
     user_id = fields.Int(dump_to='user')

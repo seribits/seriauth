@@ -42,7 +42,7 @@ def create_superuser():
     try:
         q_username = (
             session.query(Superuser).filter_by(username=username).count()
-            )
+        )
         q_email = session.query(Superuser).filter_by(email=email).count()
         if q_username > 0 or q_email > 0:
             print("¡Usuario o Correo, ya existen :( ! Intentelo nuevamente")
@@ -51,7 +51,7 @@ def create_superuser():
             superuser = Superuser(
                 username=username, email=email,
                 password=password, permissions=permissions
-                )
+            )
             try:
                 session.add(superuser)
                 session.commit()
