@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Modulo de validación de emails."""
 import re
 
 

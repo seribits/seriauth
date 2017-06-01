@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Modulo donde se crea el recurso de Tokens."""
 from flask import request
 from flask_restful import Api, Resource
 
@@ -6,6 +7,9 @@ from .. import blueprint_auth
 from ...lib.errors import error_422
 from .auth_user import auth_superuser, auth_user
 from .models import TokenSchema
+
+# http://flask.pocoo.org/
+# https://flask-restful.readthedocs.io/en/0.3.5/
 
 schema = TokenSchema()
 api = Api(blueprint_auth)

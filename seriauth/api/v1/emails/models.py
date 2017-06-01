@@ -5,6 +5,9 @@ from marshmallow import Schema, fields
 from seriauth import db
 
 
+# http://marshmallow.readthedocs.io/en/latest/quickstart.html
+
+
 class Email(db.Model):
     """Clase del modelo Email."""
 

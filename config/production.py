@@ -17,6 +17,7 @@ LOG_LEVEL = 'DEBUG'
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+# http://flask-sqlalchemy.pocoo.org/2.1/config/
 # Variable de configuración de SQLALCHEMY para un SGDB soportado.
 SQLALCHEMY_DATABASE_URI = (
     "{DB_SGDB}://{DB_USER}:{DB_PASS}@{DB_ADDR}/{DB_NAME}".format(

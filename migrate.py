@@ -7,7 +7,10 @@ from flask_script import Manager
 from run import app
 from seriauth import db
 
-"""Modulo de migración de las tablas a la base de datos."""
+# https://flask-migrate.readthedocs.io/en/latest/
+# https://flask-script.readthedocs.io/en/latest/
+
+"""Migración de las tablas a la base de datos."""
 
 migrate = Migrate(app, db)
 manager = Manager(app)

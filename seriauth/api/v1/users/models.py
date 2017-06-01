@@ -9,6 +9,9 @@ from seriauth import db
 from ..emails.models import EmailSchema
 
 
+# http://marshmallow.readthedocs.io/en/latest/quickstart.html
+
+
 class User(db.Model):
     """Modelo User."""
 

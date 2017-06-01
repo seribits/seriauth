@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Modulo de logica para poder emitir tokens."""
 from datetime import datetime, timedelta
 
 from flask import jsonify
@@ -9,6 +10,8 @@ from ...lib.errors import error_409, error_410, error_500
 from ..emails.models import Email, EmailSchema
 from ..superusers.models import Superuser
 from ..users.models import User
+
+# http://flask.pocoo.org/
 
 schema = EmailSchema()
 

@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+"""Logica del recurso Superusers."""
 from flask import make_response, request
 from flask_restful import Api, Resource
 
@@ -7,6 +8,9 @@ from ...lib.encrypt import encrypt_sha512
 from ...lib.errors import error_410, error_422, error_500
 from ...lib.regex_validators import validate_password
 from .models import Superuser, SuperuserSchema
+
+# http://flask.pocoo.org/
+# https://flask-restful.readthedocs.io/en/0.3.5/
 
 schema = SuperuserSchema()
 api = Api(blueprint_superusers)

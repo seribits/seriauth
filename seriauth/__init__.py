@@ -1,10 +1,15 @@
 # -*- encoding: utf-8 -*-
+"""Asigna los valores de configuración a la aplicación de Flask."""
 import os
+
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
 
+# http://flask-sqlalchemy.pocoo.org/2.1/quickstart/
+# http://flask.pocoo.org/
+# https://docs.python.org/3.5/library/logging.handlers.html
 db = SQLAlchemy()
 
 

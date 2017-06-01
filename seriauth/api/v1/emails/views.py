@@ -1,11 +1,14 @@
 # -*- encoding: utf-8 -*-
 """Logica del recurso Emails."""
-from flask import jsonify, make_response, request
+from flask import make_response, request
 from flask_restful import Api, Resource
 
 from .. import blueprint_emails
 from ...lib.errors import error_409, error_410, error_422, error_500
 from .models import Email, EmailSchema
+
+# http://flask.pocoo.org/
+# https://flask-restful.readthedocs.io/en/0.3.5/
 
 schema = EmailSchema()
 api = Api(blueprint_emails)

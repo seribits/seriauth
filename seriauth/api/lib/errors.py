@@ -1,6 +1,9 @@
 # -*- encoding: utf-8 -*-
+"""Modulo para creación de errores."""
 from flask import jsonify
 
+
+# http://flask.pocoo.org
 
 def error_409(error):
     """Genera un objeto JSON para el error 409.

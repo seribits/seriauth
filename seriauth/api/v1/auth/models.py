@@ -3,6 +3,8 @@
 from marshmallow import Schema, ValidationError, fields
 
 
+# http://marshmallow.readthedocs.io/en/latest/quickstart.html
+
 # validator de campos vacíos
 def must_not_be_blank(data):
     """Validación de atributos vacios.

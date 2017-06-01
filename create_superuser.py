@@ -4,6 +4,7 @@
 import getpass
 import os
 
+# http://docs.sqlalchemy.org/en/latest/orm/
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -32,7 +33,7 @@ def create_superuser():
     - password (str) - Contraseña del usuario.
 
     :note:
-    
+
     Los parametros que recibe se dan por línea de comando.
     """
     print("Nuevo administrador")

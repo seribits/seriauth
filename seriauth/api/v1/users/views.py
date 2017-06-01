@@ -9,6 +9,9 @@ from ...lib.errors import error_409, error_410, error_422, error_500
 from ..emails.models import Email, EmailSchema
 from .models import User, UserSchema
 
+# http://flask.pocoo.org/
+# https://flask-restful.readthedocs.io/en/0.3.5/
+
 schema = EmailSchema()
 schema_u = UserSchema()
 api = Api(blueprint_users)

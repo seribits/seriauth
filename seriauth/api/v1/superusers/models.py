@@ -1,7 +1,11 @@
 # -*- encoding: utf-8 -*-
+"""Modelo y esquema del recurso Superuser."""
 from marshmallow import Schema, ValidationError, fields
 
 from seriauth import db
+
+
+# http://marshmallow.readthedocs.io/en/latest/quickstart.html
 
 
 class Superuser(db.Model):

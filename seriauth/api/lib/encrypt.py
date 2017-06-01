@@ -1,5 +1,9 @@
 # -*- encoding: utf-8 -*-
+"""Modulo para cifrar y validar contraseñas."""
 from passlib.hash import pbkdf2_sha512
+
+
+# https://passlib.readthedocs.io/en/stable/lib/passlib.hash.html
 
 
 def encrypt_sha512(password, rounds, salt):

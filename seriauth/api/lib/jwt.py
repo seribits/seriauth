@@ -1,7 +1,10 @@
 # -*- encoding: utf-8 -*-
+"""Modulo encargado de crear y mostrar un Token."""
 import os
 
 from jose import jwt
+
+# http://python-jose.readthedocs.io/en/latest/jwt/api.html
 
 jwt_secret = os.environ['SERIAUTH_JWT_SECRET']
 
